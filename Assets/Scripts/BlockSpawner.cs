@@ -5,9 +5,11 @@ public class BlockSpawner : MonoBehaviour
     public GameObject block;
     private Transform spawnPosTrans;
     public Material rainbow;
+    public AudioSource SpawnSound;
     private void Start()
     {
         spawnPosTrans = GameObject.Find("SpawnPos").GetComponent<Transform>();
+        SpawnSound = GameObject.Find("SpawnSound").GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -16,6 +18,8 @@ public class BlockSpawner : MonoBehaviour
         {
             spawnPosTrans.position = new Vector3(spawnPosTrans.position.x, spawnPosTrans.position.y, 0);
             GameObject spawned = Instantiate(block, spawnPosTrans.position, Quaternion.identity);
+
+            SpawnSound.Play();
 
             int r = Random.Range(0, 10); // 0-1
             if (r == 0)
